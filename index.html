@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ออกรางวัล</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.5.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fahkwang:wght@200;400;600&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            font-family: "Fahkwang", sans-serif;
+        }
+        #box-random-number {
+            background: linear-gradient(to right, transparent 33.33%, #fff 33.33%, #fff 66.66%, transparent 66.66%);
+        }
+
+        .animate-number {
+            animation-delay: 1s;
+            animation: slideIn 3s cubic-bezier(0, 0, 0.32, 1) forwards;
+        }
+        @keyframes slideIn {
+            0% {
+                transform: translateX(0);
+                filter: blur(0);
+            }
+            89% {
+                transform: translateX(calc(-100% + 160px - 4px));
+                filter: blur(1px);
+            }
+            90% {
+                transform: translateX(calc(-100% + 160px + 4px));
+            }
+            95% {
+                transform: translateX(calc(-100% + 160px - 2px));
+                filter: blur(0);
+            }
+            100% {
+                transform: translateX(calc(-100% + 160px));
+            }
+        }
+        .animate-number-mode-fw {
+            animation-fill-mode: forwards;
+        }
+        .animate-number-mode-none {
+            animation-fill-mode: none;
+        }
+        #history-number div:last-child{
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero min-h-screen" style="
+        background-image: url(https://static.thairath.co.th/media/4DQpjUtzLUwmJZZPG145AohioI1C6GF1lcQ6wVhUb7TJ.jpg);
+      ">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-neutral-content w-1/2">
+            <div class="w-full">
+                <h1 class="mb-10 text-5xl font-bold text-white drop-shadow-md">
+                    ซื้อหวยด้วย
+                </h1>
+                <div class="mx-auto mt-0 mb-10 grid grid-flow-col gap-5 text-center content-center">
+                    <div class="grid grid-flow-row justify-items-center">
+                        <div id="box-random-number" class="relative bg-red h-16 w-40 mb-5 overflow-hidden">
+                            <div id="running-digit" class="font-mono animate-number text-black absolute z-10 mt-2 px-2 text-5xl w-fit h-full whitespace-nowrap">
+                                0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 ? 0
+                            </div>
+                            <div class="grid grid-flow-col items-center absolute h-full w-full">
+                                <div class="p-4 bg-white h-4/6"></div>
+                                <div class="p-4 border-8 border-red-600 h-full z-20"></div>
+                                <div class="p-4 bg-white h-4/6"></div>
+                            </div>
+                            <div class="grid grid-flow-col items-center absolute h-full w-full">
+                                <div class="p-4 h-4/6 backdrop-blur-sm z-20"></div>
+                                <div class="p-4 border-8 border-red-600 h-full z-20"></div>
+                                <div class="p-4 h-4/6 backdrop-blur-sm z-20"></div>
+                            </div>
+                        </div>
+                        <button id="btn-single"
+                            class="btn btn-primary bg-amber-800 hover:bg-amber-700 text-white border-none"
+                            onclick="randomSingle(this, 0)">
+                            สุ่ม
+                        </button>
+                    </div>
+                    <div class="grid grid-flow-row justify-items-center">
+                        <div id="box-random-number" class="relative bg-red h-16 w-40 mb-5 overflow-hidden">
+                            <div id="running-digit" class="font-mono animate-number text-black absolute z-10 mt-2 px-2 text-5xl w-fit h-full whitespace-nowrap">
+                                0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 ? 0
+                            </div>
+                            <div class="grid grid-flow-col items-center absolute h-full w-full">
+                                <div class="p-4 bg-white h-4/6"></div>
+                                <div class="p-4 border-8 border-red-600 h-full z-20"></div>
+                                <div class="p-4 bg-white h-4/6"></div>
+                            </div>
+                            <div class="grid grid-flow-col items-center absolute h-full w-full">
+                                <div class="p-4 h-4/6 backdrop-blur-sm z-20"></div>
+                                <div class="p-4 border-8 border-red-600 h-full z-20"></div>
+                                <div class="p-4 h-4/6 backdrop-blur-sm z-20"></div>
+                            </div>
+                        </div>
+                        <button id="btn-single"
+                            class="btn btn-primary bg-amber-800 hover:bg-amber-700 text-white border-none"
+                            onclick="randomSingle(this, 1)">
+                            สุ่ม
+                        </button>
+                    </div>
+                    <div class="grid grid-flow-row justify-items-center">
+                        <div id="box-random-number" class="relative bg-red h-16 w-40 mb-5 overflow-hidden">
+                            <div id="running-digit" class="font-mono animate-number text-black absolute z-10 mt-2 px-2 text-5xl w-fit h-full whitespace-nowrap">
+                                0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 ? 0
+                            </div>
+                            <div class="grid grid-flow-col items-center absolute h-full w-full">
+                                <div class="p-4 bg-white h-4/6"></div>
+                                <div class="p-4 border-8 border-red-600 h-full z-20"></div>
+                                <div class="p-4 bg-white h-4/6"></div>
+                            </div>
+                            <div class="grid grid-flow-col items-center absolute h-full w-full">
+                                <div class="p-4 h-4/6 backdrop-blur-sm z-20"></div>
+                                <div class="p-4 border-8 border-red-600 h-full z-20"></div>
+                                <div class="p-4 h-4/6 backdrop-blur-sm z-20"></div>
+                            </div>
+                        </div>
+                        <button id="btn-single"
+                            class="btn btn-primary bg-amber-800 hover:bg-amber-700 text-white border-none"
+                            onclick="randomSingle(this, 2)">
+                            สุ่ม
+                        </button>
+                    </div>
+                </div>
+                <button class="btn btn-primary bg-amber-400 mb-5 border-none" id="click-all-random" onclick="startLotto(this)">
+                    สุ่มทีเดียว
+                </button>
+                <div class="grid grid-cols-4 gap-4 justify-items-center text-center" id="history-number">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let hisNumber = [];
+
+        let randomNumber = null;
+        let duration = 1000;
+        let classNameAnimate = "animate-number";
+        let singleBtnClickCount = 0;
+
+        function startLotto(btn) {
+            disabledAllSingleBtn();
+
+            singleBtnClickCount = 3
+
+            btn.disabled = true;
+
+            const digitSpans = document.querySelectorAll("#running-digit");
+            digitSpans.forEach((span) => {
+                span.classList.remove(classNameAnimate);
+                void span.offsetWidth;
+            });
+
+            randomNumber = generateRandomNumber();
+            digitValues = randomNumber.split("");
+
+            digitSpans[0].classList.add(classNameAnimate);
+            digitSpans[0].innerText = renderNumber(digitValues[0]);
+
+            digitSpans[1].classList.add(classNameAnimate);
+            digitSpans[1].innerText = renderNumber(digitValues[1]);
+
+            digitSpans[2].classList.add(classNameAnimate);
+            digitSpans[2].innerText = renderNumber(digitValues[2]);
+
+            setTimeout(function() {
+                btn.disabled = false;
+                hisNumber.push(randomNumber);
+                renderHistory()
+                resetRandomNumber()
+                enableAllSingleBtn()
+                resetSingleBtnClickCount()
+            }, 3000);
+        }
+
+        function randomSingle(element, positionDigit) {
+            element.disabled = true;
+            disableBtnClickAll()
+            if(singleBtnClickCount < 3) {
+                if (randomNumber === null) {
+                    randomNumber = generateRandomNumber();
+                }
+                digitValues = randomNumber.split("");
+                console.log(digitValues);
+            }
+
+            const digitSpans = document.querySelectorAll("#running-digit");
+            digitSpans[positionDigit].classList.remove(classNameAnimate);
+            digitSpans[positionDigit].offsetWidth;
+
+            digitSpans[positionDigit].classList.add(classNameAnimate);
+            digitSpans[positionDigit].innerText = renderNumber(digitValues[positionDigit]);
+
+            singleBtnClickCount++;
+            setTimeout(function() {
+                if(singleBtnClickCount === 3) {
+                    hisNumber.push(randomNumber);
+                    renderHistory()
+                    resetRandomNumber()
+                    enableAllSingleBtn()
+                    resetSingleBtnClickCount()
+                    enableBtnClickAll()
+                }
+            }, 3000);
+        }
+
+        function generateRandomNumber() {
+            let n = randomNumberFn();
+            while (isDuplicate(n)) {
+                n = randomNumberFn();
+            }
+            return n
+        }
+
+        function randomNumberFn() {
+            return Math.floor(Math.random() * 201)
+                .toString()
+                .padStart(3, "0");
+        }
+
+        function isDuplicate(value) {
+            return hisNumber.includes(value);
+        }
+
+        function resetRandomNumber() {
+            randomNumber = null;
+        }
+
+        function resetSingleBtnClickCount() {
+            singleBtnClickCount = 0;
+        }
+
+        function renderNumber(number) {
+            number++;
+            let n = '0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9'
+            for (let index = 0; index <= number; index++) {
+                let addNumber = (index === 10) ? 0 : index
+                n += ' ' + addNumber
+            }
+            return n
+        }
+
+        function disabledAllSingleBtn() {
+            const btnSingle = document.querySelectorAll("#btn-single");
+            btnSingle.forEach((btn) => {
+                btn.disabled = true;
+            });
+        }
+
+        function enableAllSingleBtn() {
+            const btnSingle = document.querySelectorAll("#btn-single");
+            btnSingle.forEach((btn) => {
+                btn.disabled = false;
+            });
+        }
+
+        function disableBtnClickAll() {
+            const btn = document.querySelector("#click-all-random");
+            btn.disabled = true;
+        }
+
+        function enableBtnClickAll() {
+            const btn = document.querySelector("#click-all-random");
+            btn.disabled = false;
+        }
+
+        function renderHistory() {
+            const digitSpans = document.querySelector("#history-number");
+            let html = "";
+            hisNumber.forEach((n) => {
+                const splitN = n.split("");
+                let spanHTML = "";
+                splitN.forEach((digit) => {
+                    spanHTML += '<span class="bg-slate-500 rounded-full p-3 leading-none text-slate-200 font-mono">' + digit + "</span>";
+                });
+                html += '<div role="alert" class="alert alert-info bg-slate-400 border-none grid grid-cols-3 gap-4 p-3 justify-items-center" data-number="' + n + '">' + spanHTML + "</div>";
+            });
+            digitSpans.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>
