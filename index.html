@@ -48,8 +48,45 @@
         .animate-number-mode-none {
             animation-fill-mode: none;
         }
-        #history-number div:last-child{
+        #history-number div:first-child{
             background: #f5f5f5;
+            animation: hisAnimate 300ms cubic-bezier(0, 0, 0.32, 1) forwards;
+        }
+        #history-number div:first-child span:not(:last-child) {
+            animation: hisAnimateSpan 300ms cubic-bezier(0, 0, 0.32, 1) forwards;
+        }
+        #history-number div:first-child span:first-child {
+            animation-delay: 1500ms;
+        }
+        #history-number div:first-child span:nth-child(2) {
+            animation-delay: 2000ms;
+        }
+        #history-number div:first-child span:nth-child(3) {
+            animation-delay: 2500ms;
+        }
+        @keyframes hisAnimate {
+            0% {
+                transform: translateY(+5px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        @keyframes hisAnimateSpan {
+            0% {
+                transform: translateY(+5px);
+            }
+            50% {
+                transform: translateY(-5px);
+                background: rgb(251, 191, 36);
+                color: #000;
+            }
+            100% {
+                transform: translateY(0);
+            }
         }
         h1 {
             margin: 0;
@@ -94,8 +131,8 @@
 </head>
 
 <body>
-    <div class="hero min-h-screen" style="
-        background-image: url(https://static.thairath.co.th/media/4DQpjUtzLUwmJZZPG145AohioI1C6GF1lcQ6wVhUb7TJ.jpg);
+    <div class="hero min-h-screen relative" style="
+        background-image: url(https://i.ibb.co/C697W79/LOpucqxr.jpg);
       ">
         <div class="hero-overlay bg-opacity-60"></div>
         <div class="hero-content text-center text-neutral-content w-full">
@@ -105,7 +142,7 @@
                 </h1>
                 <div class="mx-auto mt-0 mb-24 grid grid-flow-col gap-1 text-center content-center" style="transform: scale(1.8);">
                     <div class="grid grid-flow-row justify-items-center">
-                        <div id="box-random-number" class="relative bg-red h-16 w-40 mb-5 overflow-hidden">
+                        <div id="box-random-number" class="relative bg-red h-16 w-40 mb-3 overflow-hidden">
                             <div id="running-digit" class="font-mono animate-number text-black absolute z-10 mt-2 px-2 text-5xl w-fit h-full whitespace-nowrap">
                                 0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 ? 0
                             </div>
@@ -127,7 +164,7 @@
                         </button>
                     </div>
                     <div class="grid grid-flow-row justify-items-center">
-                        <div id="box-random-number" class="relative bg-red h-16 w-40 mb-5 overflow-hidden">
+                        <div id="box-random-number" class="relative bg-red h-16 w-40 mb-3 overflow-hidden">
                             <div id="running-digit" class="font-mono animate-number text-black absolute z-10 mt-2 px-2 text-5xl w-fit h-full whitespace-nowrap">
                                 0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 ? 0
                             </div>
@@ -149,7 +186,7 @@
                         </button>
                     </div>
                     <div class="grid grid-flow-row justify-items-center">
-                        <div id="box-random-number" class="relative bg-red h-16 w-40 mb-5 overflow-hidden">
+                        <div id="box-random-number" class="relative bg-red h-16 w-40 mb-3 overflow-hidden">
                             <div id="running-digit" class="font-mono animate-number text-black absolute z-10 mt-2 px-2 text-5xl w-fit h-full whitespace-nowrap">
                                 0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 ? 0
                             </div>
@@ -171,25 +208,48 @@
                         </button>
                     </div>
                 </div>
-                <button class="btn btn-primary bg-amber-400 mb-5 border-none" id="click-all-random" onclick="startLotto(this)">
+                <button class="btn btn-primary bg-amber-400 hover:bg-amber-300 mb-5 border-none" id="click-all-random" onclick="startLotto(this)">
                     สุ่มทีเดียว
                 </button>
-                <div class="grid grid-cols-5 gap-4 justify-items-center text-center" id="history-number">
-                    
+                <div class="grid grid-cols-5 gap-4 justify-items-center text-center max-h-36 overflow-y-auto" id="history-number">
                 </div>
             </div>
         </div>
+        <button class="absolute bottom-10 right-10 text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 me-2 mb-2" onclick="clearHistoryLocalStorage()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
+                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
+            </svg> 
+            <span class="pl-2">clear</span>
+        </button>
     </div>
     <script>
         let hisNumber = [];
 
+        let limitNumberRandom = 250
+
         let randomNumber = null;
-        let duration = 1000;
         let classNameAnimate = "animate-number";
         let singleBtnClickCount = 0;
 
+        let firstNumberRandom = false; 
+        let secondNumberRandom = false; 
+        let thirdNumberRandom = false;
+
+        let localStorageHistoryName = 'historyRandom'
+
+        init()
+        function init() {
+            let storedHistoryRandomData = localStorage.getItem(localStorageHistoryName);
+            if (storedHistoryRandomData) {
+                hisNumber = storedHistoryRandomData.split(',');
+                renderHistory()
+            }
+        }
+
         function startLotto(btn) {
             disabledAllSingleBtn();
+            setAllNumberActive();
 
             singleBtnClickCount = 3
 
@@ -215,11 +275,14 @@
 
             setTimeout(function() {
                 btn.disabled = false;
-                hisNumber.push(randomNumber);
+                hisNumber.unshift(randomNumber);
+                saveHistoryToLocalStorage(hisNumber)
+
                 renderHistory()
                 resetRandomNumber()
                 enableAllSingleBtn()
                 resetSingleBtnClickCount()
+                setAllNumberInActive()
             }, 3000);
         }
 
@@ -231,8 +294,10 @@
                     randomNumber = generateRandomNumber();
                 }
                 digitValues = randomNumber.split("");
-                console.log(digitValues);
             }
+
+            setNumberRandom(positionDigit)
+            checkRandomNumber(positionDigit)
 
             const digitSpans = document.querySelectorAll("#running-digit");
             digitSpans[positionDigit].classList.remove(classNameAnimate);
@@ -244,7 +309,9 @@
             singleBtnClickCount++;
             setTimeout(function() {
                 if(singleBtnClickCount === 3) {
-                    hisNumber.push(randomNumber);
+                    hisNumber.unshift(randomNumber);
+                    saveHistoryToLocalStorage(hisNumber)
+
                     renderHistory()
                     resetRandomNumber()
                     enableAllSingleBtn()
@@ -263,7 +330,8 @@
         }
 
         function randomNumberFn() {
-            return Math.floor(Math.random() * 201)
+            // return Math.floor(Math.random() * 251)
+            return (Math.floor(Math.random() * limitNumberRandom) + 1) //not 000
                 .toString()
                 .padStart(3, "0");
         }
@@ -278,6 +346,49 @@
 
         function resetSingleBtnClickCount() {
             singleBtnClickCount = 0;
+        }
+
+        function setAllNumberActive() {
+            firstNumberRandom = true;
+            secondNumberRandom = true;
+            thirdNumberRandom = true;
+        }
+
+        function setAllNumberInActive() {
+            firstNumberRandom = false;
+            secondNumberRandom = false;
+            thirdNumberRandom = false;
+        }
+
+        function setNumberRandom(position) {
+            if (position === 0) {
+                firstNumberRandom = true
+            }else if (position === 1) {
+                secondNumberRandom = true
+            }else if (position === 2 ) {
+                thirdNumberRandom = true
+            }
+        }
+
+        function checkRandomNumber(position) {
+            let array = [0,1,2]
+            let n = '0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 ? 9'
+            const digitSpans = document.querySelectorAll("#running-digit");
+
+            array.forEach(function (element) {
+                if(element !== position){
+                    if (element === 0 && firstNumberRandom === false) {
+                        digitSpans[0].innerText = n
+                    }
+                    if (element === 1 && secondNumberRandom === false) {
+                        digitSpans[1].innerText = n
+                    }
+                    if (element === 2 && thirdNumberRandom === false) {
+                        digitSpans[2].innerText = n
+                    }
+                }
+            });
+            
         }
 
         function renderNumber(number) {
@@ -323,9 +434,25 @@
                 splitN.forEach((digit) => {
                     spanHTML += '<span class="bg-slate-500 rounded-full p-3 leading-none text-slate-200 font-mono">' + digit + "</span>";
                 });
-                html += '<div role="alert" class="alert alert-info bg-slate-400 border-none grid grid-cols-3 gap-4 p-3 justify-items-center" data-number="' + n + '">' + spanHTML + "</div>";
+                html += '<div role="alert" class="alert alert-info bg-slate-400 border-none grid grid-cols-3 gap-4 p-3 justify-items-center" data-number="' + n + '">' + spanHTML + '<span onclick="clearHistorySingle(`'+n+'`)" class="p-1 cursor-pointer">X</span></div>';
             });
             digitSpans.innerHTML = html;
+        }
+
+        function saveHistoryToLocalStorage(hisNumber) {
+            localStorage.setItem(localStorageHistoryName, hisNumber);
+        }
+
+        function clearHistoryLocalStorage() {
+            localStorage.removeItem(localStorageHistoryName);
+            hisNumber = [];
+            renderHistory()
+        }
+
+        function clearHistorySingle(valueToRemove) {
+            hisNumber = hisNumber.filter(item => item !== valueToRemove);
+            saveHistoryToLocalStorage(hisNumber)
+            renderHistory()
         }
     </script>
 </body>
