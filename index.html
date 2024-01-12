@@ -406,7 +406,7 @@
 
         function checkRandomNumber(position) {
             let array = [0,1,2]
-            let n = '0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 ? 9'
+            let n = '0 ? 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 _ 9'
             const digitSpans = document.querySelectorAll("#running-digit");
 
             array.forEach(function (element) {
@@ -466,9 +466,9 @@
                 const splitN = n.split("");
                 let spanHTML = "";
                 splitN.forEach((digit) => {
-                    spanHTML += '<span class="bg-slate-500 rounded-full p-2 md:p-3 text-sm md:text-base leading-none text-slate-200 font-mono">' + digit + "</span>";
+                    spanHTML += '<span class="bg-slate-500 rounded-full py-2 px-2 md:py-1 md:px-2 text-sm md:text-base leading-none text-slate-200 font-mono">' + digit + "</span>";
                 });
-                html += '<div role="alert" class="alert alert-info bg-slate-400 border-none grid grid-cols-4 gap-1 md:gap-4 p-1 md:p-3 justify-items-center" data-number="' + n + '">' + spanHTML + '<span onclick="clearHistorySingle(`'+n+'`)" class="p-1 cursor-pointer">X</span></div>';
+                html += '<div role="alert" class="alert alert-info bg-slate-400 border-none grid grid-cols-4 gap-1 md:gap-4 p-1 md:py-2 md:p-3 justify-items-center" data-number="' + n + '">' + spanHTML + '<span onclick="clearHistorySingle(`'+n+'`)" class="p-1 cursor-pointer">X</span></div>';
             });
             digitSpans.innerHTML = html;
         }
