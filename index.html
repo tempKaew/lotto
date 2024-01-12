@@ -139,11 +139,11 @@
       ">
         <div class="hero-overlay bg-opacity-60"></div>
         <div class="hero-content text-center text-neutral-content w-full">
-            <div class="w-2/3">
-                <h1 class="mb-40 text-5xl md:text-9xl font-bold text-white drop-shadow-md">
+            <div class="w-full md:w-2/3">
+                <h1 class="mb-10 mt-10 md:mt-0 md:mb-40 text-5xl md:text-9xl font-bold text-white drop-shadow-md">
                     <span class="text-blue-600">หวย</span><span class="text-red-600">กระแส</span>
                 </h1>
-                <div class="mx-auto mt-0 mb-24 grid grid-flow-col grid-cols-3 gap-1 text-center content-center md:scale-[1.8]">
+                <div class="mx-auto mt-0 mb-12 md:mb-24 grid grid-flow-col grid-cols-3 gap-1 text-center content-center scale-[0.8] md:scale-[1.8] ml-[-38px] md:ml-0">
                     <div class="grid grid-flow-row justify-items-center">
                         <div id="box-random-number" class="relative bg-red h-16 w-40 mb-3 overflow-hidden">
                             <div id="running-digit" class="font-mono animate-number text-black absolute z-10 mt-2 px-2 text-5xl w-fit h-full whitespace-nowrap">
@@ -162,7 +162,7 @@
                         </div>
                         <button id="btn-single"
                             class="btn btn-primary bg-amber-800 hover:bg-amber-700 text-white border-none"
-                            onclick="randomSingle(this, 0)">
+                            onclick="randomSingleNumber(this, 0)">
                             สุ่ม
                         </button>
                     </div>
@@ -184,7 +184,7 @@
                         </div>
                         <button id="btn-single"
                             class="btn btn-primary bg-amber-800 hover:bg-amber-700 text-white border-none"
-                            onclick="randomSingle(this, 1)">
+                            onclick="randomSingleNumber(this, 1)">
                             สุ่ม
                         </button>
                     </div>
@@ -206,12 +206,12 @@
                         </div>
                         <button id="btn-single"
                             class="btn btn-primary bg-amber-800 hover:bg-amber-700 text-white border-none"
-                            onclick="randomSingle(this, 2)">
+                            onclick="randomSingleNumber(this, 2)">
                             สุ่ม
                         </button>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4 justify-items-center md:max-w-80 mb-5 my-0 mx-auto">
+                <div class="grid grid-cols-2 gap-4 justify-items-center md:max-w-80 mb-10 md:mb-5 my-0 mx-auto">
                     <button class="btn btn-primary bg-gray-400 hover:bg-gray-300 border-none cursor-pointer" onclick="playSoundBeep()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note-beamed" viewBox="0 0 16 16">
                             <path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13s1.12-2 2.5-2 2.5.896 2.5 2m9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2"/>
@@ -227,7 +227,7 @@
                         สุ่มทีเดียว
                     </button>
                 </div>
-                <div class="grid grid-cols-5 gap-4 justify-items-center text-center max-h-36 overflow-y-auto" id="history-number">
+                <div class="grid grid-cols-2 mb-12 md:mb-0 md:grid-cols-5 gap-2 md:gap-4 justify-items-center text-center max-h-36 overflow-y-auto" id="history-number">
                 </div>
             </div>
         </div>
@@ -301,11 +301,11 @@
                 resetRandomNumber()
                 enableAllSingleBtn()
                 resetSingleBtnClickCount()
-                setAllNumberInActive()
+                resetAllNumberInActive()
             }, 3000);
         }
 
-        function randomSingle(element, positionDigit) {
+        function randomSingleNumber(element, positionDigit) {
             playSoundSpin()
             element.disabled = true;
             disableBtnClickAll()
@@ -337,6 +337,7 @@
                     enableAllSingleBtn()
                     resetSingleBtnClickCount()
                     enableBtnClickAll()
+                    resetAllNumberInActive()
                 }
             }, 3000);
         }
@@ -386,7 +387,8 @@
             thirdNumberRandom = true;
         }
 
-        function setAllNumberInActive() {
+        function resetAllNumberInActive() {
+            console.log('resetAllNumberInActive');
             firstNumberRandom = false;
             secondNumberRandom = false;
             thirdNumberRandom = false;
@@ -464,9 +466,9 @@
                 const splitN = n.split("");
                 let spanHTML = "";
                 splitN.forEach((digit) => {
-                    spanHTML += '<span class="bg-slate-500 rounded-full p-3 leading-none text-slate-200 font-mono">' + digit + "</span>";
+                    spanHTML += '<span class="bg-slate-500 rounded-full p-2 md:p-3 text-sm md:text-base leading-none text-slate-200 font-mono">' + digit + "</span>";
                 });
-                html += '<div role="alert" class="alert alert-info bg-slate-400 border-none grid grid-cols-3 gap-4 p-3 justify-items-center" data-number="' + n + '">' + spanHTML + '<span onclick="clearHistorySingle(`'+n+'`)" class="p-1 cursor-pointer">X</span></div>';
+                html += '<div role="alert" class="alert alert-info bg-slate-400 border-none grid grid-cols-4 gap-1 md:gap-4 p-1 md:p-3 justify-items-center" data-number="' + n + '">' + spanHTML + '<span onclick="clearHistorySingle(`'+n+'`)" class="p-1 cursor-pointer">X</span></div>';
             });
             digitSpans.innerHTML = html;
         }
@@ -479,6 +481,8 @@
             localStorage.removeItem(localStorageHistoryName);
             hisNumber = [];
             renderHistory()
+            resetAllNumberInActive()
+            enableAllSingleBtn()
         }
 
         function clearHistorySingle(valueToRemove) {
