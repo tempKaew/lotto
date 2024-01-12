@@ -344,12 +344,14 @@
             digitSpans[2].classList.add(classNameAnimate);
             digitSpans[2].innerText = renderNumber(digitValues[2]);
 
+            hisNumber.unshift(randomNumber);
+            saveHistoryToLocalStorage(hisNumber)
+            setTimeout(function() {
+                readNumber()
+            }, 300);
+
             setTimeout(function() {
                 btn.disabled = false;
-                hisNumber.unshift(randomNumber);
-                saveHistoryToLocalStorage(hisNumber)
-
-                readNumber()
 
                 renderHistory()
                 resetRandomNumber()
@@ -381,13 +383,17 @@
             digitSpans[positionDigit].innerText = renderNumber(digitValues[positionDigit]);
 
             singleBtnClickCount++;
+
+            if(singleBtnClickCount === 3) {
+                hisNumber.unshift(randomNumber);
+                saveHistoryToLocalStorage(hisNumber)
+                setTimeout(function() {
+                    readNumber()
+                }, 300);
+            }
+
             setTimeout(function() {
                 if(singleBtnClickCount === 3) {
-                    hisNumber.unshift(randomNumber);
-                    saveHistoryToLocalStorage(hisNumber)
-
-                    readNumber()
-
                     renderHistory()
                     resetRandomNumber()
                     enableAllSingleBtn()
