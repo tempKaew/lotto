@@ -1,3 +1,3 @@
-Lotto
+# Lotto thai style
 
-demo :: lotto-ivory.vercel.app
+demo :: [tempkaew-lotto.vercel.app](https://tempkaew-lotto.vercel.app/)
